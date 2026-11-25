@@ -36,6 +36,16 @@ app.include_router(calls.router, prefix=settings.API_V1_PREFIX)
 app.include_router(dashboard.router, prefix=settings.API_V1_PREFIX)
 
 
+@app.get("/")
+def root():
+    return {
+        "status": "ok",
+        "app": settings.APP_NAME,
+        "health": "/health",
+        "docs": "/docs",
+    }
+
+
 @app.get("/health")
 def health_check():
     return {"status": "ok", "app": settings.APP_NAME}
